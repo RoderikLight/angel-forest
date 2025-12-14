@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c3cwb5xay02y5"
+path="res://.godot/imported/four_voices_whispering_2_wecho-6755 (mp3cut.net).mp3-e54073492690e643e93bedb6750c633f.mp3str"
+
+[deps]
+
+source_file="res://sounds/four_voices_whispering_2_wecho-6755 (mp3cut.net).mp3"
+dest_files=["res://.godot/imported/four_voices_whispering_2_wecho-6755 (mp3cut.net).mp3-e54073492690e643e93bedb6750c633f.mp3str"]
+
+[params]
+
+loop=true
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

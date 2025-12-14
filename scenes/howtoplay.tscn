@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://d231s00crpicl"]
+
+[ext_resource type="Script" uid="uid://cpyb8metfnpl3" path="res://scenes/howtoplay.gd" id="1_25cri"]
+[ext_resource type="Texture2D" uid="uid://cbkk04fxi7buo" path="res://materials/weeping.png" id="1_hsfox"]
+
+[node name="Howtoplay" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_25cri")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+show_behind_parent = true
+light_mask = 0
+visibility_layer = 8
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.0034722222
+anchor_top = -0.36265433
+anchor_right = 1.6631944
+anchor_bottom = 1.3040123
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_hsfox")
+metadata/_edit_use_anchors_ = true
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 423.0
+grow_horizontal = 2
+theme_override_colors/default_color = Color(0.4909253, 0.97093755, 0.92032176, 1)
+bbcode_enabled = true
+text = "[b][i]You're a hiker lost in a forest somewhere in Italy, and just as the night arrives, you seek refuge in a seemingly abandoned
+church in the middle of the woods, little did you know, however, that you're not the only one hiding in there, and as the door locks
+ behind you, you must find a way to escape from this place; but be wary, whatever is living in here isn't too fond of visitors...[/i][/b]
+
+[b]HOW TO PLAY
+
+LOOK AROUND WITH YOUR MOUSE
+MOVE USING YOUR WASD KEYS
+USE YOUR FLASHLIGHT TO SEE IN THE DARK
+IT MOVES WHEN YOU'RE NOT SEEING IT
+DON'T LET IT GET TO YOU
+FIND A WAY OUT"
+tab_size = 8
+horizontal_alignment = 1
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -89.0
+offset_right = 247.0
+offset_bottom = -45.0
+grow_vertical = 0
+scale = Vector2(2, 2)
+theme_override_colors/font_color = Color(0.4909253, 0.97093755, 0.92032176, 1)
+text = "BACK"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

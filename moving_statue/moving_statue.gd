@@ -1,14 +1,16 @@
 extends CharacterBody3D
 
 
-const SPEED = 10.0
+const SPEED = 15.0
 const OCC_RAY_TARGET_Y_OFFSET = 0.5
 
 @export var target_player : CharacterBody3D
+@export var kill_distance = 1.6
 
 var _occlusion_check_rays : Array[RayCast3D]
 var is_looked_at = true
 var follow_player = false
+var is_killing = false
 
 @onready var occlusion_check_rays_parent = $OcclusionCheckRaysParent
 @onready var visible_on_screen_notifier = $VisibleOnScreenNotifier3D
@@ -39,7 +41,7 @@ func _start_following_player():
 
 
 func _physics_process(_delta):
-	if not follow_player:
+	if is_killing or not follow_player:
 		return
 	
 	is_looked_at = _is_viewed()
@@ -64,12 +66,24 @@ func _physics_process(_delta):
 	# applying velocity using move direction
 	velocity = direction * SPEED
 	move_and_slide()
+	
+	if global_position.distance_to(target_player.global_position) <= kill_distance:
+		_start_kill()
 
+func _start_kill():
+	is_killing = true
+	follow_player = false
+	velocity = Vector3.ZERO	
+	
+	look_at(target_player.global_position, Vector3.UP)
+	
+	if target_player.has_method("on_killed"):
+		target_player.on_killed(self)
+	
 
 func _is_viewed() -> bool:
 	var viewed = visible_on_screen_notifier.is_on_screen()
 	
-	# if statue not on screen, we can already stop
 	if not viewed:
 		return viewed
 	
@@ -82,7 +96,7 @@ func _is_viewed() -> bool:
 		if viewed and r.is_colliding():
 			colliding_rays += 1
 	
-	# if all raycasts are colliding, the statue is hidden by an obstacle
+	# if all raycasts are colliding, the statue is hidden so it can move
 	if colliding_rays >= _occlusion_check_rays.size():
 		viewed = false
 	

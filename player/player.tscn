@@ -1,17 +1,104 @@
-[gd_scene load_steps=3 format=3 uid="uid://dfdjg6qbeunvr"]
+[gd_scene load_steps=7 format=3 uid="uid://dfdjg6qbeunvr"]
 
-[ext_resource type="Script" path="res://player/player.gd" id="2_10sax"]
+[ext_resource type="Script" uid="uid://gfimtre4dcy0" path="res://player/player.gd" id="2_10sax"]
+[ext_resource type="PackedScene" uid="uid://dml7odtt257rm" path="res://scenes/pause_menu.tscn" id="2_rkbax"]
+[ext_resource type="Script" uid="uid://c3gehejpbjgq6" path="res://player/pause_controller.gd" id="3_g1dw6"]
+[ext_resource type="AudioStream" uid="uid://dg6ogo6fv0vvk" path="res://sounds/footsteps-278819.mp3" id="4_yw30f"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_bbutj"]
 
-[node name="Player" type="CharacterBody3D"]
+[sub_resource type="GDScript" id="GDScript_g1dw6"]
+script/source = "extends CanvasLayer
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[node name="Player" type="CharacterBody3D" groups=["player"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-collision_layer = 2
 collision_mask = 5
 script = ExtResource("2_10sax")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_bbutj")
 
+[node name="AudioListener3D" type="AudioListener3D" parent="."]
+doppler_tracking = 2
+
+[node name="PauseController" type="Node" parent="."]
+process_mode = 3
+script = ExtResource("3_g1dw6")
+
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.754935, 0)
+
+[node name="PauseMenu" parent="Camera3D" instance=ExtResource("2_rkbax")]
+process_mode = 2
+visible = false
+
+[node name="Flashlight" type="SpotLight3D" parent="Camera3D" groups=["flashlight"]]
+light_color = Color(0.99355525, 0.9850039, 0.5645224, 1)
+light_energy = 4.0
+shadow_enabled = true
+shadow_bias = 0.05
+shadow_normal_bias = 0.6
+spot_range = 18.0
+spot_angle = 25.0
+
+[node name="KillUI" type="CanvasLayer" parent="Camera3D"]
+
+[node name="Vignette" type="ColorRect" parent="Camera3D/KillUI"]
+visibility_layer = 4
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.47843137, 0, 0, 0)
+
+[node name="FadeBlack" type="ColorRect" parent="Camera3D/KillUI"]
+visibility_layer = 2
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.003921569, 0.003921569, 0.003921569, 0)
+
+[node name="HUD" type="CanvasLayer" parent="Camera3D"]
+script = SubResource("GDScript_g1dw6")
+
+[node name="KeyCounter" type="Label" parent="Camera3D/HUD"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "Keys: 0/3"
+
+[node name="Subtitles" type="Label" parent="Camera3D/HUD"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -169.0
+offset_top = -50.0
+offset_right = 169.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_font_sizes/font_size = 36
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_yw30f")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://b2ru3f20qjyi6"]
+
+[ext_resource type="Script" uid="uid://c8ykfhuikjqpi" path="res://keys/keypiece.gd" id="1_w3ecr"]
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_4vt2l"]
+albedo_color = Color(0.79450256, 0.6713362, 0.11888421, 1)
+emission_enabled = true
+emission = Color(0.15487596, 0.154876, 0.15487596, 1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_w3ecr"]
+radius = 0.1
+height = 0.4
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_w3ecr"]
+radius = 0.5336609
+height = 1.0673218
+
+[node name="KeyPiece" type="Node3D"]
+script = ExtResource("1_w3ecr")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0)
+material_override = SubResource("ORMMaterial3D_4vt2l")
+mesh = SubResource("CapsuleMesh_w3ecr")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 4.2286707e-10, -0.009674072)
+shape = SubResource("CapsuleShape3D_w3ecr")
+debug_color = Color(0.652692, 0.5188844, 9.62615e-07, 0.41960785)
+
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
