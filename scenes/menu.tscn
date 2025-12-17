@@ -43,6 +43,11 @@ size_flags_vertical = 3
 theme_override_colors/font_color = Color(0.4909253, 0.97093755, 0.92032176, 1)
 text = "Start"
 
+[node name="HardButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.4909253, 0.97093755, 0.92032176, 1)
+text = "Hard Mode"
+
 [node name="CreditsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
@@ -63,6 +68,7 @@ theme_override_colors/font_color = Color(0.4909253, 0.97093755, 0.92032176, 1)
 text = "Quit"
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HardButton" to="." method="_on_hard_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/CreditsButton" to="." method="_on_credits_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/HowToPlayButton" to="." method="_on_how_to_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

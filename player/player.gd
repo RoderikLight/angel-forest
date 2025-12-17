@@ -38,6 +38,8 @@ const SFX_KEYS = preload("res://sounds/jingling-keys-419578.mp3")
 
 
 func _ready():
+	total_key_pieces = GameSettings.total_keys
+	keycounter.text = "Keys: 0 / %d" % total_key_pieces
 	set_physics_process(true)
 	set_process(true)
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
@@ -187,14 +189,14 @@ func _update_flashlight(delta: float) -> void:
 		
 
 #Thingies to do with collecting key pieces
-var total_key_pieces := 3
-var collected_key_pieces := 0
+var total_key_pieces = 3
+var collected_key_pieces = 0
 
 func on_key_collected(_piece):
 	audio.stream = SFX_KEYS
 	audio.play()
 	collected_key_pieces += 1
-	keycounter.text = "Keys: %d / %d" % [collected_key_pieces, total_key_pieces]
+	keycounter.text = "Keys: %d/%d" % [collected_key_pieces, total_key_pieces]
 	
 	if collected_key_pieces >= total_key_pieces:
 		subtitle.text = "I need to find the exit now!"
