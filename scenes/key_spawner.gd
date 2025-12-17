@@ -5,6 +5,7 @@ extends Node3D
 
 func _ready():
 	await get_tree().process_frame
+	keys_to_spawn = GameSettings.total_keys
 	spawn_keys()
 
 func spawn_keys():
