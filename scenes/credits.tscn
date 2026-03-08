@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://cjc58bla1ymjx"]
+[gd_scene load_steps=3 format=3 uid="uid://cjc58bla1ymjx"]
 
 [ext_resource type="Script" uid="uid://dovpwm6k2ta36" path="res://scenes/credits.gd" id="1_0ctdu"]
 [ext_resource type="Texture2D" uid="uid://cbkk04fxi7buo" path="res://materials/weeping.png" id="1_2ckv8"]
-[ext_resource type="Texture2D" uid="uid://1g362gekt68a" path="res://materials/pic.jpg" id="2_0ctdu"]
 
 [node name="Credits" type="Control"]
 layout_mode = 3
@@ -26,39 +25,6 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_2ckv8")
 metadata/_edit_use_anchors_ = true
-
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -66.0
-offset_top = -102.5
-offset_right = 66.0
-offset_bottom = 102.5
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("2_0ctdu")
-expand_mode = 1
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.68500006
-anchor_right = 0.5
-anchor_bottom = 0.68500006
-offset_left = -69.0
-offset_top = -9.880035
-offset_right = 74.0
-offset_bottom = 39.119965
-grow_horizontal = 2
-grow_vertical = 2
-bbcode_enabled = true
-text = "LEAD DEVELOPER
- Rodrigo Salcedo "
 
 [node name="Button" type="Button" parent="."]
 layout_mode = 1
